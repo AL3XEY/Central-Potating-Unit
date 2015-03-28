@@ -5,7 +5,7 @@ ENTITY cpu16bits IS
 	PORT(
 		run, resetn, clk : IN STD_LOGIC;
 		din : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-		bus : INOUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+		busio : INOUT STD_LOGIC_VECTOR(15 DOWNTO 0);
 		done : OUT STD_LOGIC
 	);
 END;
