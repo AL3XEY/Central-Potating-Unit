@@ -9,8 +9,10 @@ ENTITY halfadder1bit IS
 END;
 
 ARCHITECTURE bhv OF halfadder1bit IS
+BEGIN
+	PROCESS
+	BEGIN
 	q <= a XOR b;
 	co <= a AND b;
-BEGIN
-
+	END PROCESS;
 END;

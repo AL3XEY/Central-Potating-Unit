@@ -17,17 +17,16 @@ ARCHITECTURE bhv OF fulladder1bit IS
 		);
 	END COMPONENT;
 	
-	SIGNAL sig_a, sig_b, sig_ci, sig_q1, sig_q, sig_co1, sig_co2, sig_co : STD_LOGIC;
+	SIGNAL  sig_q1, sig_co1, sig_co2: STD_LOGIC;
 	
 BEGIN
 
-	ha1 : halfadder1bit PORT MAP (sig_a, sig_b, sig_q1, sig_co1);
-	ha2 : halfadder1bit PORT MAP (sig_q1, sig_ci, sig_q, sig_co2);
+	ha1 : halfadder1bit PORT MAP (a, b, sig_q1, sig_co1);
+	ha2 : halfadder1bit PORT MAP (sig_q1, ci, q, sig_co2);
 	
 	PROCESS
 	BEGIN
 		co <= sig_co1 OR sig_co2;
-		q <= sig_q;
 	END PROCESS;
 
 END;
