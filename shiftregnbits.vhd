@@ -1,0 +1,24 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY shiftregnbits IS
+	GENERIC(
+		n : IN NATURAL := 16
+	);
+
+	PORT(
+		a : IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
+		q : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)
+	);
+END;
+
+ARCHITECTURE bhv OF shiftregnbits IS
+BEGIN
+	PROCESS
+	BEGIN
+		shift : FOR i IN 0 TO n-1 LOOP
+			q(i+1) <= a(n);
+		END LOOP;
+		q <= (OTHERS => '0');
+	END PROCESS;
+END;
