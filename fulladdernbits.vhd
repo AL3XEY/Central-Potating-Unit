@@ -4,7 +4,7 @@ USE IEEE.NUMERIC_STD.ALL;
 
 ENTITY fulladdernbits IS
 	GENERIC(
-		n : IN natural := 16
+		n : IN NATURAL := 16
 	);
 
 	PORT(
