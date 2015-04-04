@@ -7,7 +7,7 @@ ENTITY registernbit IS
 	);
 
 	PORT(
-		clk : IN STD_LOGIC;
+		en : IN STD_LOGIC;
 		d : IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
 		q : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)
 	);
@@ -21,7 +21,7 @@ ARCHITECTURE dlatch OF registernbit IS
 		);
 
 		PORT(
-			clk : IN STD_LOGIC;
+			en : IN STD_LOGIC;
 			d : IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
 			q, qn : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)
 		);
@@ -31,6 +31,6 @@ ARCHITECTURE dlatch OF registernbit IS
 
 BEGIN
 
-	dlatch : dlatchnbit PORT MAP (clk, d, q, sig_qn);
+	dlatch : dlatchnbit PORT MAP (en, d, q, sig_qn);
 
 END;

@@ -3,7 +3,7 @@ USE IEEE.STD_LOGIC_1164.ALL;
 
 ENTITY dlatch1bit IS
 	PORT(
-		clk, d : IN STD_LOGIC;
+		en, d : IN STD_LOGIC;
 		q, qn : OUT STD_LOGIC
 	);
 END;
@@ -21,8 +21,8 @@ ARCHITECTURE bhv OF dlatch1bit IS
 
 BEGIN
 	
-	sig_r <= (NOT d) AND clk;
-	sig_s <= d AND clk;
+	sig_r <= (NOT d) AND en;
+	sig_s <= d AND en;
 
 	rs : rslatch1bit PORT MAP (sig_r, sig_s, q, qn);
 
