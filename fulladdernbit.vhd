@@ -2,7 +2,7 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
 
-ENTITY fulladdernbits IS
+ENTITY fulladdernbit IS
 	GENERIC(
 		n : IN NATURAL := 16
 	);
@@ -15,7 +15,7 @@ ENTITY fulladdernbits IS
 	);
 END;
 
-ARCHITECTURE bhv OF fulladdernbits IS
+ARCHITECTURE bhv OF fulladdernbit IS
 
 	COMPONENT fulladder1bit IS
 		PORT(

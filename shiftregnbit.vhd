@@ -1,7 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
-ENTITY shiftregnbits IS
+ENTITY shiftregnbit IS
 	GENERIC(
 		n : IN NATURAL := 16
 	);
@@ -12,7 +12,7 @@ ENTITY shiftregnbits IS
 	);
 END;
 
-ARCHITECTURE bhv OF shiftregnbits IS
+ARCHITECTURE bhv OF shiftregnbit IS
 BEGIN
 	PROCESS
 	BEGIN
