@@ -8,7 +8,7 @@ ENTITY multnbits IS
 
 	PORT(
 		a, b : IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
-		q : OUT STD_LOGIC_VECTOR((2*n)-1 DOWNTO 0);
+		q : OUT STD_LOGIC_VECTOR((2*n)-1 DOWNTO 0)
 	);
 END;
 
