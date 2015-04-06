@@ -1,3 +1,17 @@
 *~
 *.o
 *.cf
+
+# LaTeX
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.synctex.gz
+*.nav
+*.snm
+
+*.pdf
