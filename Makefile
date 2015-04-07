@@ -1,4 +1,4 @@
-all : alunbit controlunit cpu16bit dlatch1bit dlatchnbit fulladder1bit fulladdernbit halfadder1bit minusnbit multnbit mux10to1nbit notnbit registernbit rslatch1bit shiftregnbit wrapper
+all : alunbit controlunit cpunbit dlatch1bit dlatchnbit fulladder1bit fulladdernbit halfadder1bit minusnbit multnbit mux10to1nbit notnbit registernbit rslatch1bit shiftregnbit wrapper
 
 alunbit : alunbit.o
 	ghdl -e alunbit
@@ -12,11 +12,11 @@ controlunit : controlunit.o
 controlunit.o : controlunit.vhd
 	ghdl -a controlunit.vhd
 
-cpu16bit : cpu16bit.o
-	ghdl -e cpu16bit
+cpunbit : cpunbit.o
+	ghdl -e cpunbit
 
-cpu16bit.o : cpu16bit.vhd
-	ghdl -a cpu16bit.vhd
+cpunbit.o : cpunbit.vhd
+	ghdl -a cpunbit.vhd
 
 dlatch1bit : dlatch1bit.o
 	ghdl -e dlatch1bit
@@ -97,4 +97,4 @@ wrapper.o : wrapper.vhd
 	ghdl -a wrapper.vhd
 
 clean : 
-	rm -f *~ *.o *.cf e~*.o alunbit controlunit cpu16bit dlatch1bit dlatchnbit fulladder1bit fulladdernbit halfadder1bit minusnbit multnbit mux10to1nbit notnbit registernbit rslatch1bit shiftregnbit wrapper
+	rm -f *~ *.o *.cf e~*.o alunbit controlunit cpunbit dlatch1bit dlatchnbit fulladder1bit fulladdernbit halfadder1bit minusnbit multnbit mux10to1nbit notnbit registernbit rslatch1bit shiftregnbit wrapper
