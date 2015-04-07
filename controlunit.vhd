@@ -57,19 +57,21 @@ BEGIN
 	BEGIN
 		IF rising_edge(clk) THEN
 			IF (instruction(2) = '0') THEN --add, sub, mul (alu)
-				IF (state = 1) THEN --state 1--
-					reg_sel <= sel_rx;
-					write <= wr_a;
-					state <= 2;
-				ELSIF (state = 2) THEN --state 2--
-					reg_sel <= sel_ry;
-					write <= wr_acc;
-					state <= 3;
-				ELSIF (state = 3) THEN --state 3--
-					reg_sel <= sel_alu;
-					write <= wr_rx;
-					state <= 1;
-				END IF;
+				CASE state IS
+					WHEN 1 => --state 1--
+						reg_sel <= sel_rx;
+						write <= wr_a;
+						state <= 2;
+					WHEN 2 => --state 2--
+						reg_sel <= sel_ry;
+						write <= wr_acc;
+						state <= 3;
+					WHEN 3 => --state 3--
+						reg_sel <= sel_alu;
+						write <= wr_rx;
+						state <= 1;
+					WHEN OTHERS => NULL;
+				END CASE;
 			ELSIF (instruction(2) = '1') THEN --else
 				IF (instruction(2) = '0') THEN --mv
 					reg_sel <= sel_ry;
