@@ -2,7 +2,14 @@
 *.o
 *.cf
 
-# LaTeX
+##### Eclipse / Sigasi #####
+
+.library_mapping.xml
+.project
+.settings/
+
+##### LaTeX #####
+
 *.aux
 *.lof
 *.log
