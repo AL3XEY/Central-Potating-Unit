@@ -39,7 +39,7 @@ ARCHITECTURE bhv OF multnbit IS
 		);
 	END COMPONENT;
 	Type tableau is array (0 to n-1) of STD_LOGIC_VECTOR(n-1 DOWNTO 0);
-	SIGNAL  sa, sb,./ s : tableau;
+	SIGNAL  sa, sb, s : tableau;
 	SIGNAL 	cout :  STD_LOGIC_VECTOR(n-1 DOWNTO 0);
 	
 BEGIN
@@ -63,8 +63,10 @@ BEGIN
 		END GENERATE;
 			q(j)<=s(0)(j);
 	END GENERATE;
-	addersii:FOR i IN n-5 to n-2 GENERATE
-			q(i) <= s(i-4);--confere dernier adder dans le 2e schema
+	addersiii:FOR i IN n-5 to n-2 GENERATE
+	--addersiii:FOR i IN n-9 to n-6 GENERATE
+			q(i) <= s(i-4)(0);--confere dernier adder dans le 2e schema
+			--q(i+4) <= s(i)(0); --confere dernier adder dans le 2e schema
 	END GENERATE;
 	q(n-1) <= cout(n-1); 
 END;

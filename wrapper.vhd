@@ -11,7 +11,7 @@ ENTITY wrapper IS
 	);
 END;
 
-ARCHITECTURE bhv OF cpu16bit IS
+ARCHITECTURE bhv OF wrapper IS
 
 	COMPONENT cpu16bit IS
 		PORT(
