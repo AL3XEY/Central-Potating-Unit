@@ -17,6 +17,7 @@ ARCHITECTURE fsm OF controlunit IS --needs a counter for 3-state operations
 	SIGNAL operation : STD_LOGIC_VECTOR(1 DOWNTO 0);
 	SIGNAL sel_rx, sel_ry, sel_din, sel_alu : STD_LOGIC_VECTOR(3 DOWNTO 0);
 	SIGNAL wr_rx, wr_a, wr_acc : STD_LOGIC_VECTOR(9 DOWNTO 0);
+	SIGNAL state : NATURAL;
 
 BEGIN
 
@@ -25,6 +26,7 @@ BEGIN
 
 	--signal & output initialization--
 
+	state <= 1;
 	done <= '0';
 	write <= (OTHERS => '0');
 	alu_sel <= instruction(7 DOWNTO 6);
@@ -54,23 +56,29 @@ BEGIN
 	PROCESS
 	BEGIN
 		--TODO : clock
-		IF (instruction(2) = '0') THEN --add, sub, mul (alu)
-			--state 1--
-			reg_sel <= sel_rx;
-			write <= wr_a;
-			--state 2--
-			reg_sel <= sel_ry;
-			write <= wr_acc;
-			--state 3--
-			reg_sel <= sel_alu;
-			write <= wr_rx;
-		ELSIF (instruction(2) = '1') THEN --else
-			IF (instruction(2) = '0') THEN --mv
-				reg_sel <= sel_ry;
-			ELSIF (instruction(2) = '1') THEN --mvi
-				reg_sel <= sel_din;
+		IF rising_edge(clk) THEN
+			IF (instruction(2) = '0') THEN --add, sub, mul (alu)
+				IF (state = 1) THEN --state 1--
+					reg_sel <= sel_rx;
+					write <= wr_a;
+					state <= 2;
+				ELSIF (state = 2) THEN --state 2--
+					reg_sel <= sel_ry;
+					write <= wr_acc;
+					state <= 3;
+				ELSIF (state = 3) THEN --state 3--
+					reg_sel <= sel_alu;
+					write <= wr_rx;
+					state <= 1;
+				END IF;
+			ELSIF (instruction(2) = '1') THEN --else
+				IF (instruction(2) = '0') THEN --mv
+					reg_sel <= sel_ry;
+				ELSIF (instruction(2) = '1') THEN --mvi
+					reg_sel <= sel_din;
+				END IF;
+					write <= wr_rx;
 			END IF;
-				write <= wr_rx;
 		END IF;
 		done <= '1';
 	END PROCESS;
