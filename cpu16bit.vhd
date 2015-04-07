@@ -34,7 +34,7 @@ ARCHITECTURE bhv OF cpu16bit IS
 		);
 	END COMPONENT;
 
-	COMPONENT mux10to1 IS
+	COMPONENT mux10to1nbit IS
 		GENERIC(
 			n : IN NATURAL := 16
 		);

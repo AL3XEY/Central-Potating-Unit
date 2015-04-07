@@ -1,7 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
-ENTITY mux10to1 IS
+ENTITY mux10to1nbit IS
 	GENERIC(
 		n : IN NATURAL := 16
 	);
@@ -13,7 +13,7 @@ ENTITY mux10to1 IS
 	);
 END;
 
-ARCHITECTURE concur OF mux10to1 IS
+ARCHITECTURE concur OF mux10to1nbit IS
 BEGIN
 	WITH sig SELECT q <=
 		r0 WHEN "0000",
