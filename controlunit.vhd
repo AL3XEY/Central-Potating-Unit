@@ -4,7 +4,7 @@ USE IEEE.STD_LOGIC_1164.ALL;
 ENTITY controlunit IS
 	PORT(
 		instruction : IN STD_LOGIC_VECTOR(8 DOWNTO 0);
-		run, resetn : IN STD_LOGIC;
+		run, resetn, clk : IN STD_LOGIC;
 		write : OUT STD_LOGIC_VECTOR(9 DOWNTO 0);
 		reg_sel, alu_sel, done : OUT STD_LOGIC
 	);
