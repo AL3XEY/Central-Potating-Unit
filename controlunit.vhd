@@ -12,7 +12,7 @@ ENTITY controlunit IS
 	);
 END;
 
-ARCHITECTURE fsm OF controlunit IS --needs a counter for 3-state operations
+ARCHITECTURE fsm OF controlunit IS
 
 	SIGNAL operation : STD_LOGIC_VECTOR(1 DOWNTO 0);
 	SIGNAL sel_rx, sel_ry, sel_din, sel_alu : STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -55,7 +55,6 @@ BEGIN
 
 	PROCESS
 	BEGIN
-		--TODO : clock
 		IF rising_edge(clk) THEN
 			IF (instruction(2) = '0') THEN --add, sub, mul (alu)
 				IF (state = 1) THEN --state 1--
