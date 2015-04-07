@@ -7,10 +7,10 @@ ENTITY alunbit IS
 	);
 
 	PORT(
-		a, b : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		a, b : IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
 		sel : IN STD_LOGIC_VECTOR(1 DOWNTO 0); --operation selection
 		overflow : OUT STD_LOGIC; --if an overflow is detected
-		q : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+		q : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)
 	);
 END;
 
@@ -23,9 +23,9 @@ ARCHITECTURE bhv OF multnbits IS
 
 		PORT(
 			a, b : IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
-			ci : IN STD_LOGIC; --carry in
+			ci : IN STD_LOGIC; --carry in --always equals to '0' here
 			q : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0);
-			co : OUT STD_LOGIC --carry out
+			co : OUT STD_LOGIC --carry out --if co is equal to 1, overflow
 		);
 	END COMPONENT;
 
