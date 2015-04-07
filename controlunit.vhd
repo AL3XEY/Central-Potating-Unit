@@ -5,20 +5,61 @@ ENTITY controlunit IS
 	PORT(
 		instruction : IN STD_LOGIC_VECTOR(8 DOWNTO 0);
 		run, resetn, clk : IN STD_LOGIC;
-		write : OUT STD_LOGIC_VECTOR(9 DOWNTO 0);
-		reg_sel, alu_sel, done : OUT STD_LOGIC
+		write, reg_sel : OUT STD_LOGIC_VECTOR(9 DOWNTO 0);
+		alu_sel : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+		done : OUT STD_LOGIC
 	);
 END;
 
 ARCHITECTURE fsm OF controlunit IS --needs a counter for 3-state operations
 
-	SIGNAL operation, rx, ry : STD_LOGIC_VECTOR(2 DOWNTO 0);
+	SIGNAL operation : STD_LOGIC_VECTOR(1 DOWNTO 0);
+	SIGNAL sel_rx, sel_ry, sel_din, sel_alu : STD_LOGIC_VECTOR(3 DOWNTO 0);
+	SIGNAL wr_rx, wr_a, wr_acc : STD_LOGIC_VECTOR(9 DOWNTO 0);
 
 BEGIN
 
 	--if mv or mvi, 1 state
 	--if add, sub or mult, 3 states
 
-	alu_sel <= op(8 DOWNT0 6);
+	--signal initialization--
+
+	alu_sel <= instruction(7 DOWNT0 6);
+	sel_din <= "1000";
+	sel_alu <= "1001";
+	sel_rx(3) <= 0;
+	sel_rx(2 DOWNTO 0) <= instruction(5 DOWNTO 3);
+	sel_ry(3) <= 0;
+	sel_rx(2 DOWNTO 0) <= instruction(2 DOWNTO 0);
+
+	wr_a <= "0100000000";
+	wr_acc <= "1000000000";
+
+	WITH instruction(5 DOWNTO 3) SELECT wr_rx <=
+		"0000000001" WHEN "000",
+		"0000000010" WHEN "001",
+		"0000000100" WHEN "010",
+		"0000001000" WHEN "011",
+		"0000010000" WHEN "100",
+		"0000100000" WHEN "101",
+		"0001000000" WHEN "110",
+		"0010000000" WHEN "111",
+		(OTHERS => 'X') WHEN OTHERS;
+
+	--fsm--
+
+	--TODO : clock
+	IF (instruction(2) = '0') THEN --add, sub, mul (alu)
+		--state 1--
+		
+		--state 2--
+		
+		--state 3--
+		
+	ELSIF (instruction(2) = '1') THEN
+		IF (instruction(2) = '0') THEN --mv
+			
+		ELSIF (instruction(2) = '1') THEN --mvi
+	END IF;
 
 END;
