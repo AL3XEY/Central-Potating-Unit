@@ -38,11 +38,27 @@ ARCHITECTURE bhv OF multnbit IS
 			q : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)
 		);
 	END COMPONENT;
+	Type tableau is array (0 to n-1) of STD_LOGIC_VECTOR(n-1 DOWNTO 0);
+	SIGNAL  sa, sb, s : tableau;
 
 BEGIN
+
 	--generate 4 adders & 4 shifters
 
 	overflow <= '0';
-	q <= '0';
+	q(0) <= a(0) and b(0);
+
+	addersii:FOR i IN 0 to n-2 GENERATE
+			sa(i)(0) <= a(i+1) and b(0);
+	END GENERATE;
+	sa(n-1)(0) <= '0';
+
+	addersj:FOR j IN 0 to n-1 GENERATE
+		addersi:FOR i IN 0 to n-1 GENERATE
+			sb(i)(j) <= a(i) and b(j+1);
+			adder : fulladdernbit PORT MAP (sa(j), sb(j), '0', s(j), sig_co_tmp(i));
+
+		END GENERATE;
+	END GENERATE;
 
 END;
