@@ -2,10 +2,14 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
 ENTITY mux10to1 IS
+	GENERIC(
+		n : IN NATURAL := 16
+	);
+
 	PORT(
-		r0, r1, r2, r3, r4, r5, r6, r7, din, alu : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		r0, r1, r2, r3, r4, r5, r6, r7, din, alu : IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
 		sig : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
-		q : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+		q : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)
 	);
 END;
 
