@@ -39,8 +39,9 @@ ARCHITECTURE bhv OF multnbit IS
 		);
 	END COMPONENT;
 	Type tableau is array (0 to n-1) of STD_LOGIC_VECTOR(n-1 DOWNTO 0);
-	SIGNAL  sa, sb, s : tableau;
-
+	SIGNAL  sa, sb,./ s : tableau;
+	SIGNAL 	cout :  STD_LOGIC_VECTOR(n-1 DOWNTO 0);
+	
 BEGIN
 
 	--generate 4 adders & 4 shifters
@@ -56,9 +57,14 @@ BEGIN
 	addersj:FOR j IN 0 to n-1 GENERATE
 		addersi:FOR i IN 0 to n-1 GENERATE
 			sb(i)(j) <= a(i) and b(j+1);
-			adder : fulladdernbit PORT MAP (sa(j), sb(j), '0', s(j), sig_co_tmp(i));
+			adder : fulladdernbit PORT MAP (sa(j), sb(j), '0', s(j), cout(i));
+			sa(i)(j) <= s(i+1)(j);-- faire un if ou l'équivalent i +1 < n-1
 
 		END GENERATE;
+			q(j)<=s(0)(j);
 	END GENERATE;
-
+	addersii:FOR i IN n-5 to n-2 GENERATE
+			q(i) <= s(i-4);--confere dernier adder dans le 2e schema
+	END GENERATE;
+	q(n-1) <= cout(n-1); 
 END;
