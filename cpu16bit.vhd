@@ -35,6 +35,10 @@ ARCHITECTURE bhv OF cpu16bit IS
 	END COMPONENT;
 
 	COMPONENT mux10to1 IS
+		GENERIC(
+			n : IN NATURAL := 16
+		);
+
 		PORT(
 			r0, r1, r2, r3, r4, r5, r6, r7, din, alu : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 			sig : IN STD_LOGIC_VECTOR(3 DOWNTO 0);

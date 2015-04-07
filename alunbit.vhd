@@ -8,7 +8,7 @@ ENTITY alunbit IS
 
 	PORT(
 		a, b : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-		sel : IN STD_LOGIC; --operation selection
+		sel : IN STD_LOGIC_VECTOR(1 DOWNTO 0); --operation selection
 		overflow : OUT STD_LOGIC; --if an overflow is detected
 		q : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
 	);
