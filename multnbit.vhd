@@ -8,8 +8,8 @@ ENTITY multnbit IS
 
 	PORT(
 		a, b : IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
-		overflow : OUT STD_LOGIC; --if an overflow is detected
-		q : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)
+		q : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0);
+		overflow : OUT STD_LOGIC --if an overflow is detected
 	);
 END;
 
