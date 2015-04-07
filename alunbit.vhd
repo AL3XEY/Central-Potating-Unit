@@ -36,9 +36,8 @@ ARCHITECTURE bhv OF multnbits IS
 
 		PORT(
 			a, b : IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
-			ci : IN STD_LOGIC; --carry in
-			q : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0);
-			co : OUT STD_LOGIC --carry out
+			overflow : OUT STD_LOGIC; --if an overflow is detected
+			q : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)
 		);
 	END COMPONENT;
 
