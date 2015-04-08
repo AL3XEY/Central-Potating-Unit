@@ -3,13 +3,13 @@ USE IEEE.STD_LOGIC_1164.ALL;
 
 ENTITY multnbit IS
 	GENERIC(
-		n : IN NATURAL := 16
+		n : IN NATURAL := 8
 	);
 
 	PORT(
 		a, b : IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
-		q : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0);
-		overflow : OUT STD_LOGIC --if an overflow is detected
+		overflow : OUT STD_LOGIC; --if an overflow is detected
+		q : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0)
 	);
 END;
 
@@ -57,16 +57,20 @@ BEGIN
 	addersj:FOR j IN 0 to n-1 GENERATE
 		addersi:FOR i IN 0 to n-1 GENERATE
 			sb(i)(j) <= a(i) and b(j+1);
-			adder : fulladdernbit PORT MAP (sa(j), sb(j), '0', s(j), cout(i));
-			sa(i)(j) <= s(i+1)(j);-- faire un if ou l'équivalent i +1 < n-1
+			adder : fulladdernbit PORT MAP (sa(j), sb(j), '0', s(j), cout(i)); --component instance "adder" is not bound
+			PROCESS
+	BEGIN
+			if i +1 < n-1 then
+			sa(i)(j) <= s(i+1)(j);-- entourer cette ligne d'un if ou l'équivalent if(i +1 < n-1)
+			end if;
+				END PROCESS;
 
+--ghdl:error: bound check failure at multnbit.vhd:61
 		END GENERATE;
 			q(j)<=s(0)(j);
 	END GENERATE;
-	addersiii:FOR i IN n-5 to n-2 GENERATE
-	--addersiii:FOR i IN n-9 to n-6 GENERATE
-			q(i) <= s(i-4)(0);--confere dernier adder dans le 2e schema
-			--q(i+4) <= s(i)(0); --confere dernier adder dans le 2e schema
+	addersiip:FOR i IN n-5 to n-2 GENERATE
+			q(i) <= s(i-4)(n-1);--confere dernier adder dans le 2e schema
 	END GENERATE;
 	q(n-1) <= cout(n-1); 
 END;
