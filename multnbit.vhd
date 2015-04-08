@@ -3,7 +3,7 @@ USE IEEE.STD_LOGIC_1164.ALL;
 
 ENTITY multnbit IS
 	GENERIC(
-		n : IN NATURAL := 8
+		n : IN NATURAL := 16
 	);
 
 	PORT(
@@ -41,6 +41,7 @@ ARCHITECTURE bhv OF multnbit IS
 	Type tableau is array (0 to n-1) of STD_LOGIC_VECTOR(n-1 DOWNTO 0);
 	SIGNAL  sa, sb, s : tableau;
 	SIGNAL 	cout :  STD_LOGIC_VECTOR(n-1 DOWNTO 0);
+	SIGNAL 	sig_q :  STD_LOGIC_VECTOR((2*n)-1 DOWNTO 0);
 	
 BEGIN
 
@@ -56,8 +57,13 @@ BEGIN
 
 	addersj:FOR j IN 0 to n-1 GENERATE
 		addersi:FOR i IN 0 to n-1 GENERATE
+			foo:IF (j = n-1) GENERATE
+				sb(i)(j) <= '0';
+			END GENERATE;
+			bar:IF (j /= n-1) GENERATE
 			sb(i)(j) <= a(i) and b(j+1);
-			adder : fulladdernbit PORT MAP (sa(j), sb(j), '0', s(j), cout(i)); --component instance "adder" is not bound
+			END GENERATE;
+			adder : fulladdernbit GENERIC MAP (n) PORT MAP (sa(j), sb(j), '0', s(j), cout(i)); --component instance "adder" is not bound
 			PROCESS
 	BEGIN
 			if i +1 < n-1 then
@@ -67,10 +73,12 @@ BEGIN
 
 --ghdl:error: bound check failure at multnbit.vhd:61
 		END GENERATE;
-			q(j)<=s(0)(j);
+			sig_q(j)<=s(0)(j);
 	END GENERATE;
-	addersiip:FOR i IN n-5 to n-2 GENERATE
-			q(i) <= s(i-4)(n-1);--confere dernier adder dans le 2e schema
-	END GENERATE;
-	q(n-1) <= cout(n-1); 
+	--addersiip:FOR i IN n-5 to n-2 GENERATE
+	--		sig_q(i) <= s(i-4)(n-1);--confere dernier adder dans le 2e schema
+	--END GENERATE;
+	sig_q <= (OTHERS => '0'); --TODO remove this line
+	sig_q(n-1) <= cout(n-1); 
+	q <= sig_q(n-1 DOWNTO 0);
 END;
