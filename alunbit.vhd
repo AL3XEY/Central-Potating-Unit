@@ -54,6 +54,7 @@ ARCHITECTURE bhv OF alunbit IS
 		);
 	END COMPONENT;
 
+	SIGNAL sig_a, sig_b : STD_LOGIC_VECTOR((n/2)-1 DOWNTO 0);
 	SIGNAL add_q, sub_q, mul_q : STD_LOGIC_VECTOR(n-1 DOWNTO 0);
 	SIGNAL add_ovf, sub_ovf, mul_ovf : STD_LOGIC;
 
@@ -63,7 +64,7 @@ BEGIN
 
 	sub : subbernbit GENERIC MAP (n) PORT MAP (a, b, '0', sub_q, sub_ovf);
 
-	mul : multnbit GENERIC MAP (n) PORT MAP (a, b, mul_q, mul_ovf);
+	mul : multnbit GENERIC MAP (n/2) PORT MAP (sig_a, sig_b, mul_q, mul_ovf);
 
 	WITH sel SELECT q <=
 		add_q WHEN "00",
