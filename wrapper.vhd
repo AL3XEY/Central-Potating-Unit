@@ -13,7 +13,11 @@ END;
 
 ARCHITECTURE bhv OF wrapper IS
 
-	COMPONENT cpu16bit IS
+	COMPONENT cpunbit IS
+		GENERIC(
+			n : IN NATURAL := 16
+		);
+		
 		PORT(
 			run, resetn, clk : IN STD_LOGIC;
 			din : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
@@ -28,6 +32,6 @@ BEGIN
 
 	databus <= (OTHERS => '0');
 	ledg(0) <= key(0);
-	cpu : cpu16bit PORT MAP(key(2), key(1), key(0), sw, databus, ledg(1)); --databus?
+	cpu : cpunbit GENERIC MAP (16) PORT MAP(key(2), key(1), key(0), sw, databus, ledg(1)); --databus?
 
 END;

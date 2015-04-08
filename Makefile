@@ -1,4 +1,10 @@
-all : alunbit controlunit cpunbit dlatch1bit dlatchnbit fulladder1bit fulladdernbit halfadder1bit minusnbit multnbit mux10to1nbit notnbit registernbit rslatch1bit shiftregnbit wrapper
+all : controlunit rslatch1bit  dlatch1bit dlatchnbit halfadder1bit fulladder1bit fulladdernbit  notnbit  minusnbit subbernbit shiftregnbit  multnbit mux10to1nbit registernbit  alunbit  cpunbit wrapper
+
+subbernbit : subbernbit.o
+	ghdl -e subbernbit
+
+subbernbit.o : subbernbit.vhd
+	ghdl -a subbernbit.vhd
 
 alunbit : alunbit.o
 	ghdl -e alunbit
@@ -29,6 +35,12 @@ dlatchnbit : dlatchnbit.o
 
 dlatchnbit.o : dlatchnbit.vhd
 	ghdl -a dlatchnbit.vhd
+halfadder1bit : halfadder1bit.o
+	ghdl -e halfadder1bit
+
+halfadder1bit.o : halfadder1bit.vhd
+	ghdl -a halfadder1bit.vhd
+
 
 fulladder1bit : fulladder1bit.o
 	ghdl -e fulladder1bit
@@ -41,12 +53,6 @@ fulladdernbit : fulladdernbit.o
 
 fulladdernbit.o : fulladdernbit.vhd
 	ghdl -a fulladdernbit.vhd
-
-halfadder1bit : halfadder1bit.o
-	ghdl -e halfadder1bit
-
-halfadder1bit.o : halfadder1bit.vhd
-	ghdl -a halfadder1bit.vhd
 
 minusnbit : minusnbit.o
 	ghdl -e minusnbit
