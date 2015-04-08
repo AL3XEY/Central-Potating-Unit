@@ -17,7 +17,7 @@ ARCHITECTURE bhv OF multnbit IS
 
 	COMPONENT fulladdernbit IS
 		GENERIC(
-			n : IN NATURAL := 16
+			n : IN NATURAL := 8
 		);
 
 		PORT(
@@ -30,7 +30,7 @@ ARCHITECTURE bhv OF multnbit IS
 
 	COMPONENT shiftregnbit IS
 		GENERIC(
-			n : IN NATURAL := 16
+			n : IN NATURAL := 8
 		);
 
 		PORT(
