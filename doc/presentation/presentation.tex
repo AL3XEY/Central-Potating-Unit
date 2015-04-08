@@ -90,6 +90,7 @@
 	\begin{itemize}
 		\item Processeur 16 bits
 		\item 5 opérations
+		\item Encodage des données en complément à deux
 	\end{itemize}
 \end{block}
 \end{frame}
@@ -98,6 +99,17 @@
 \begin{frame}
 \frametitle{Ressources} %logisim, GHDL, EDA Playground
 						%+fac = Quartus Altera, cartes FPGA
+\begin{block}{Programmation}
+	\begin{itemize}
+		\item EDA Playground
+		\item GHDL
+	\end{itemize}
+\end{block}
+\begin{block}{Simulation}
+	\begin{itemize}
+		\item GTKWave
+	\end{itemize}
+\end{block}
 \end{frame}
 
 %\section{Encodage des données}
@@ -108,11 +120,30 @@
 %\section{Architecture du CPU}
 \begin{frame}
 \frametitle{Architecture du CPU}
+%\includegraphics[scale=0.5]{cpu_interface}
 \end{frame}
 
 %\section{Unité de contrôle}
 \begin{frame}
 \frametitle{Unité de contrôle}
+\end{frame}
+
+%\section{Unité de contrôle}
+\begin{frame}
+\frametitle{Problèmes rencontrés}
+\begin{block}{Ressources}
+	\begin{itemize}
+		\item Quartus II & Modelsim laborieux à installer
+		\item Indisponible sur MacOS
+		\item GHDL & GTKWave : nécessite du temps pour apprendre
+	\end{itemize}
+\end{block}
+\begin{block}{Méthode}
+	\begin{itemize}
+		\item Concentration sur la compilation
+		\item Peu de tests unitaires : effet tunnel
+	\end{itemize}
+\end{block}
 \end{frame}
 
 %\section{Conclusion}
