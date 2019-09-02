@@ -1,2 +1,2 @@
 # Central-Potating-Unit
-A 16bits CPU designed in VHDL.
+A 16-bit CPU designed in VHDL.
